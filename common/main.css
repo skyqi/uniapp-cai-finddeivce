@@ -1,0 +1,45 @@
+ dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+     margin:0;
+     padding:0;
+ }
+ 
+/* 去掉列表前的标识，li 会继承 */
+ul, ol,li { list-style: none !important; padding: 0 !important ;}
+
+/* 对齐是排版最重要的因素，别让什么都居中 */
+caption,th {
+    text-align:left;
+}
+/* 来自yahoo，让标题都自定义，适应多个系统应用 */
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:500;
+}
+
+a:link, a:visited { color: #5e5e5e; text-decoration: none; }
+a:hover { /*color:#999;*/ }
+a:hover { color: #c9394a; /*text-decoration: underline;*/ }
+a:active { color: #666; }/*浮动和清除浮动*/
+
+/* 清除浮动 */
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+.clear {
+    clear:both;
+    display:block;
+    font-size:0;
+    height:0;
+    line-height:0;
+    overflow:hidden;
+}
+
+img { border: none }
