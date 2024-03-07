@@ -1,0 +1,112 @@
+/* 设置根元素的font-size为375px的两倍的一半，即375px / 2 / 2 = 93.75px */
+html {
+  font-size: 9.375px; /* 375px / 2 / 2 */
+}
+
+/* 设置body的宽度为750px，即总宽度的两倍，这样100%的宽度就是750px */
+body {
+  min-width: 750px;
+  width: 100%; /* 750px */
+  margin: 0 auto; /* 水平居中 */
+  box-sizing: border-box; /* 包含边框和内边距的宽度 */
+}
+
+@media (min-width: 751px) {
+  body {
+    width: 80%; /* 留出20%的边白 */
+    margin: 0 10%; /* 10%的边白 */
+  }
+}
+
+/* 其他样式 */
+.container {
+	width: 100%; /* 或者你可以设置一个具体的宽度，比如90% */
+	padding: 0 15px; /* 适当的内边距 */
+	margin: 0 auto; /* 水平居中 */
+
+	background-color: var(--main-bg-color);
+	font-size: var(--font-size);
+	border-radius: var(--border-radius);
+	padding: 10px;
+	  
+}
+
+/* ---------------------------------- */
+.index .navbar-top {
+	height:10rem !important; 	 
+	/* background-color:white; */
+	display: flex;
+	justify-content: space-between;
+	margin-top: 6rem;
+	
+ }
+
+.index .navbar-top .nav-logo{
+    height: 4rem;	
+	margin-left: 2rem;	
+	margin-top: 2rem;
+}
+
+
+.index .navbar-top .dian{
+   margin-right: 1rem; 
+   height:6rem;
+}
+	
+.index .navbar-top p{
+	color: white;
+	font-size: 3rem;
+	height: 4rem;
+	line-height: 9rem;
+	margin-left: 1rem;
+}
+	
+.index .main-content  {
+	/* margin-top:4rem; */
+	
+}
+
+/* .index  .device-group {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+} */
+
+.index .device-group {
+		display: flex;
+	    flex-direction: row;
+	    flex-wrap: wrap;
+	    justify-content: space-around;
+}
+
+.index .device-group .device-item-warp {
+	
+}
+
+.index .scroll-view-item {
+	display: flex;
+} 
+
+.index .main-content .device-item {
+	display: flex;
+	
+	height: 20rem;
+	width: 20rem;
+	margin: 2rem; 
+	background-color:#262524 ;
+	border-radius: 2rem;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.index .main-content .device-item img {
+	width:8rem;
+}
+
+.index .main-content .device-item h3{
+	font-size:2rem;
+	color:white;
+	margin-top: 2rem;
+}
