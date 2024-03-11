@@ -1,0 +1,15 @@
+:root {
+	--main-bg-color: #f7f7f7;
+	--font-size: 14px;
+	--border-radius: 4px;
+	--bg-device:#f0f2f2;
+	--add-device-ico-bg:#d8dada;
+	--add-device-ico-em-bg:#ed883c;
+	--add-device-lable:block;
+	--add-device-dian-ico:#191918;
+	--language-wrap:#f7f7f7;
+	--dark-white-light-block:#000000;
+	--dark-block-light-white:#ffffff;
+	--dark-262524--light-f7f7f7:#f7f7f7;
+	--dark-ffffff--light-333230:#ffffff;
+}

@@ -1,0 +1,147 @@
+.dark .icon {
+    width: 3rem;
+    height: 1.8rem;
+    background-color: #e1e1e2;
+    border-radius: 20px;
+    position: relative;
+    left: 3rem;
+}
+
+.dark .icon::after {
+	content: 'Light';
+	left: -3rem;
+	position: absolute;
+	top: 0.2rem;
+}
+
+.dark .icon span {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: white;
+    position: absolute;
+    text-align: right;
+    border-radius: 20px;
+    display: inline-block;
+    left: 3px;
+    top: 3px;
+}
+
+.dark .icon span em {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: black;
+    display: inline-block;
+    z-index: 5;
+    -webkit-mask: url(/static/Images/light/light_mode.svg);
+    mask: url(/static/Images/light/light_mode.svg);
+    left: 4px;
+    top: 4px;
+}
+
+.language {
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.language h3,p {
+    color: block;
+    margin-bottom: 10px;
+}
+ 
+.device-items ul {
+    color: block;
+}
+
+
+.device-list .grid-item-box {		 
+	background-color:#f0f2f2 !important;	 
+}
+
+.device-items ul{
+	background-color: #ffffff;
+	color:#000;
+}
+
+.device-items .current {
+	background-color:#f0f2f2;
+}
+
+.device-page  h3 {
+	color:#000 !important;
+}
+
+.device-page .nav-img::before {
+	background-color: #000;
+}
+
+.device-grid .row-device-body .row-device-col2 em.dian-ico::before{
+    background-color: #000;
+}
+
+.device-page .popup_inbox {
+	background-color: #f7f7f7;
+	border-radius: 10px;
+}
+
+
+.settings p.alerted {
+	color:#000 !important;
+}
+
+.updateview * {
+	color:#000  !important;
+}
+
+
+.row-device-body .row-device-row {
+    background-color: #fff !important;
+}
+
+
+.row-device-body .row-device-col2 {
+    color: #000 !important;
+}
+
+.device-popup-wrap .languagetxt::before {
+	background-color: #000;
+}
+
+.device-popup-wrap .abouttxt::before {
+	background-color: #000;
+}
+
+.device-popup-wrap .themetxt::before {
+	background-color: #000;
+}
+
+.device-grid  .pairing {
+	background-color: #ffffff;
+	 
+}
+
+.devPopup .devPopup-inbox {
+	background-color:#f7f7f7 ;
+}
+
+.devPopup .devPopup-inbox h3 {
+	color:#000;
+}
+
+.devPopup .renamedevice-input {
+    background: #ffffff;
+}
+
+.settings .ringtone-Form-item *{
+	color:#000;
+}
+	
+.settings .ringtone-Form-item {
+	background: #ffffff;
+	margin: -20px;
+	padding:10px;
+	
+	
+}
