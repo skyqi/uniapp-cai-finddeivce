@@ -46,7 +46,7 @@ const Theme = getTheme()
 	
 Theme:getTheme()
 
-<img class="loading" :src="'/static/gifs/'+theme+'/Radar-E.gif'" /> 
+<img class="loading" :src="'./static/gifs/'+theme+'/Radar-E.gif'" /> 
 
 <view class="aboutview pageview">
 			<span @click='returnHandle'>
@@ -56,3 +56,14 @@ Theme:getTheme()
 			
 
 '''
+
+
+```vue
+<view :class="themeCss" tag="themeCss">
+	<div class="cpage">
+	
+	..
+	Theme: getTheme(),
+themeCss: getTheme() + 'Theme'
+
+```

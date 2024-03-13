@@ -3,12 +3,16 @@ export const myFunction = () => {
 };
 
 export const getTheme = () => {
-	const theme = localStorage.getItem('theme');
+	const theme = uni.getStorageSync('theme');
+	console.log("7 theme==",theme)
 	if (!theme) {
-		localStorage.setItem('theme','light');
-		return 'light';
+		uni.setStorageSync('theme', 'light');
+		return 'light';			
 	} else {
 		return theme;
-	}	 
+	}	
+	 
+	 // uni.setStorageSync('theme', 'dark');
+	 // return 'dark';
 }
 

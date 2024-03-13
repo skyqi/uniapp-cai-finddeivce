@@ -1,4 +1,7 @@
 <template>
+	<view :class="themeCss" tag="themeCss">
+		<div class="cpage"> 
+			
 	<view class="device-page updateview">
 		<uni-section class="mb-10 section" title="Device update">
 			<span @click='returnHandle'>
@@ -7,16 +10,10 @@
 		
 		<view v-if="step1">
 		   <view class="device-logo">
-				<RadialProgress class="progress"
-				  :diameter="200"
-				  :completed-steps="completedSteps"
-				  :total-steps="totalSteps"
-				   :startColor="'#db792f'"
-				   :stopColor="'#191918'"
-				   :innerStrokeColor="'#191918'"
-				  >
-				   <!-- Your inner content here -->
-				 </RadialProgress>
+				
+				<l-circle class="progress" strokeColor="#f09653,#f7f7f7" v-model:current="modelVale" :percent="target" size="120px">					   
+				</l-circle>	
+									
 			</view>
 			
 			<view class="update">
@@ -27,7 +24,7 @@
 		
 		<view v-if="step2">
 		    <view class="device-logo">
-				<image style="width:15rem;height:15rem;" src="/static/Images/Device update - dark.png"></image> 
+				<img style="width:15rem;height:15rem;" :src="'./static/Images/'+Theme+'/Device-update.png'" />
 			</view>
 			
 			<view class="update">
@@ -42,31 +39,27 @@
 		
 		<view v-if="step3">
 		   <view class="device-logo">
-				<RadialProgress class="progress"
-				  :diameter="200"
-				  :completed-steps="completedSteps"
-				  :total-steps="totalSteps"
-				   :startColor="'#db792f'"
-				   :stopColor="'#191918'"
-				   :innerStrokeColor="'#191918'"
-				  >
-				  <span class="progress-percentage">{{ completedSteps / totalSteps * 100 }}%</span>
-				  
-				 </RadialProgress>
+				<l-circle class="progress" strokeColor="#f09653,#f7f7f7" v-model:current="modelVale" :percent="target" size="120px">	
+				 <text class="progress-text">{{modelVale}}%</text>
+				</l-circle>	
 			</view>
 			
 			<view class="update">
 				<p>Checking for update...</p>
 				<small>Current version 1.0.02</small>
 			</view>
-		</view>
-		
+		</view>		
 	</view>
+	</div></view>
 </template>
 
 <script>
-	// https://github.com/jairoblatt/vue3-radial-progress?tab=readme-ov-file
-	import RadialProgress from "vue3-radial-progress";
+	 
+	import {
+		getTheme
+	} from '@/common/utils'; // 只导入特定的函数
+	
+	const Theme = getTheme()
 	 
 	
 	export default {
@@ -83,11 +76,14 @@
 				step1:true,
 				step2:false,
 				step3:false,
+				Theme:getTheme(),
+				themeCss: getTheme() + 'Theme',
+				target:100,
+				modelVale:0,
+				
 			}
 		},
-		components: {
-		    RadialProgress
-		  },
+		 
 		methods: {
 			returnHandle:function() {
 				uni.navigateTo({
@@ -95,25 +91,29 @@
 				}); 
 			},			 
 			updateHandle:function() {
-				uni.navigateTo({
-					url: '/pages/device_update/device_update'
-				});
+				// uni.navigateTo({
+				// 	url: '/pages/device_update/device_update'
+				// });
+				this.step1 = false;
+				this.step2 = false;
+				this.step3 = true;
+				// setTimeout(()=>{
+				// 	this.step1 = false;
+				// 	this.step2 = true;
+				// 	uni.navigateTo({
+				// 	 	url: '/pages/device_update/device_update'
+				// 	});
+				// },3000)  
 			},
 		 
 		},
 		mounted() {
 			  // 启动定时器，每秒增加一次完成的步骤
-			  this.interval = setInterval(() => {
-				if (this.completedSteps < this.totalSteps) {
-				  this.completedSteps++;
-				} else {
-				  // 当完成的步骤等于总步骤时，清除定时器
-				  clearInterval(this.interval);
-				  this.step1 = false;
-				  this.step2 = true;
-				}
-			  }, 1000); // 每秒更新一次
-			  
+			 
+			setTimeout(()=>{
+				this.step1 = false;
+				this.step2 = true;
+			},3000)  
 		}
 	}
 </script>
@@ -135,6 +135,7 @@
 .device-page .progress {
 	text-align: center;
 	margin: 0 auto;
+ 
 }
 
 .update {

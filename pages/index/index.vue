@@ -1,80 +1,84 @@
 <template>
-	<div class="header-bar">
-		<img class="address-logo" :src="'/static/Images/'+Theme+'/logo with text.png'" />
-		<view class="dian-ico" @click="toggle('bottom')" ></view>
-	</div>
-	<!--  -----index.vue---------------- -->
-	<uni-grid class="device-list" :column="2" :square="false" :highlight="false"  >
-		<uni-grid-item v-for="(item, index) in 1 " :index="index" :key="index">
-			<view class="grid-item-box" @click="show_allow">
-				<div class="add-wrap"><em class="ico"></em></div>
-				<text class="label">Add device</text>
-			</view>
-		</uni-grid-item>
-	</uni-grid>
-	 
-	<!-- 底部弹窗 -->
-	<uni-popup ref="popup" class="popup-wrap language-wrap" background-color="var(--language-wrap)"  >
-		<view class="popup-content"><text class="text languagetxt" @click="languagePopupHandle">Language</text></view>
-		<view class="popup-content"><text class="text abouttxt" @click="goAbout">About</text></view>
-		<view class="popup-content theme"><text class="text themetxt">Theme</text>
-			<view class="dark" @click="switchTheme">				 
-				<view class="icon">
-					<span><em></em></span>
+	<view :class="themeCss" tag="themeCss">
+		<div class="cpage">
+			<div class="header-bar">
+				<img class="address-logo" :src="'./static/Images/'+Theme+'/logo-with-text.png'" />
+				<view class="dian-ico" @click="toggle('bottom')"></view>
+			</div>
+			<!--  -----index.vue---------------- -->
+			<div class="device-list-box">
+				<uni-grid class="device-list" :column="2" :square="false" :showBorder="false" :highlight="false">
+					<uni-grid-item v-for="(item, index) in 3 " :index="index" :key="index">
+						<view class="grid-item-box" @click="show_allow">
+							<div class="add-wrap"><em class="ico"></em></div>
+							<text class="label">Add device</text>
+						</view>
+					</uni-grid-item>
+				</uni-grid>
+			</div>
+
+			<!-- 底部弹窗 -->
+			<uni-popup ref="popup" class="popup-wrap language-wrap" background-color="var(--language-wrap)">
+				<view class="popup-content"><text class="text languagetxt" @click="languagePopupHandle">Language</text>
 				</view>
-			</view>
-		</view>
-	</uni-popup>
-
-	<!-- 居中弹窗 -->
-	<uni-popup ref="popupfind" class="popupfind"  style="background-color:#f7f7f7">
-		<view class="popup-content" style="background-color:#f7f7f7">
-			<img class="icon" src="http://via.placeholder.com/10x10" />
-		</view>
-		<view class="popup-content" style="background-color:#f7f7f7" >
-			<text class="text size-dot-8" style="text-align: left;color:#000000">
-				Allow Pulse to find,connect to and determine the relative position on nearby devices?
-			</text>
-		</view>
-		<view class="popup-content" @click="allowHandle" style="background-color:#f7f7f7">
-			<text class="text co-blue ">Allow</text>
-		</view>
-		<view class="popup-content  " @click="donitallowHandle" style="background-color:#f7f7f7">
-			<text class="text  co-blue ">Donit allow</text>
-		</view>
-	</uni-popup>
-
-	<view>
-		<!-- Select app language 弹窗 -->
-		<uni-popup ref="languagePopup" class="languagePopup" background-color=" ">
-			<view class="example language">
-				<h3>Select app language</h3>
-				<uni-forms ref="baseForm" :modelValue="baseFormData">
-					<uni-forms-item>
-						<uni-data-checkbox v-model="lang" :localdata="langs" />
-					</uni-forms-item>
-
-				</uni-forms>
-
-				<view class="button-group">
-
-					<li @click="langCanclehandel">Cancle</li>
-					<li @click="langCanclehandel">Confirm</li>
-
+				<view class="popup-content"><text class="text abouttxt" @click="goAbout">About</text></view>
+				<view class="popup-content theme"><text class="text themetxt">Theme</text>
+					<view class="dark" @click="switchTheme">
+						<view class="icon">
+							<span><em></em></span>
+						</view>
+					</view>
 				</view>
+			</uni-popup>
+
+			<!-- 居中弹窗 -->
+			<uni-popup ref="popupfind" class="popupfind" style="background-color:#f7f7f7;border-radius: 1rem;">
+				<view class="popup-content" style="background-color:#f7f7f7;margin-bottom: -0.5rem;">			
+					<uni-icons class="icon" type="location-filled" size="25"></uni-icons>
+				</view>
+				<view class="popup-content" style="background-color:#f7f7f7">
+					<text class="text size-dot-8" style="display: block;text-align: left;color:#000000;padding:1rem">
+						Allow Pulse to find,connect to and determine the relative position on nearby devices?
+					</text>
+				</view>
+				<view class="popup-content" @click="allowHandle" style="background-color:#f7f7f7">
+					<text class="text co-blue " style="line-height: 3rem;">Allow</text>
+				</view>
+				<view class="popup-content  " @click="donitallowHandle" style="background-color:#f7f7f7">
+					<text class="text  co-blue " style="line-height: 3rem;">Donit allow</text>
+				</view>
+			</uni-popup>
+
+			<view>
+				<!-- Select app language 弹窗 -->
+				<uni-popup ref="languagePopup" class="languagePopup" background-color=" ">
+					<view class="example language">
+						<h3>Select app language</h3>
+						<uni-forms ref="baseForm" :modelValue="baseFormData">
+							<uni-forms-item>
+								<uni-data-checkbox v-model="lang" :localdata="langs" />
+							</uni-forms-item>
+						</uni-forms>
+
+						<view class="button-group">
+							<li @click="langCanclehandel">Cancle</li>
+							<li @click="langCanclehandel">Confirm</li>
+						</view>
+					</view>
+				</uni-popup>
 			</view>
-		</uni-popup>
+		</div>
 	</view>
-
 </template>
 
 <script>
 	import $themeConf from '@/common/config';
-	import { getTheme } from '@/common/utils'; // 只导入特定的函数
+	import {
+		getTheme
+	} from '@/common/utils'; // 只导入特定的函数
 
 	const Theme = getTheme()
-	// document.body.style.backgroundColor = $themeConf[Theme]['body-bg-color'];
-	console.log(Theme)
+	console.log("82 theme==",Theme);
 	export default {
 		data() {
 			return {
@@ -92,7 +96,8 @@
 					value: 2
 				}],
 				// themeConf:$themeConf[Theme],
-				Theme:getTheme()
+				Theme: getTheme(),
+				themeCss: getTheme() + 'Theme'
 			}
 		},
 		methods: {
@@ -122,27 +127,31 @@
 					url: '/pages/about/about'
 				});
 			},
-			switchTheme() {	
-				let theme = localStorage.getItem('theme');
+			switchTheme() {		
+				const theme = uni.getStorageSync('theme');
 				if (!theme) {
-					localStorage.setItem('theme','light');
-				}else if (theme=='dark') {
-					localStorage.setItem('theme','light');
-				}else {
-					localStorage.setItem('theme','dark');
+					uni.setStorageSync('theme', 'light');
+					this.themeCss = 'lightTheme'
+					this.Theme = 'light'
+				} else if (theme == 'dark') {
+					uni.setStorageSync('theme', 'light');
+					this.themeCss = 'lightTheme'
+					this.Theme = 'light'
+				} else {
+					uni.setStorageSync('theme', 'dark');
+					this.themeCss = 'darkTheme'
+					this.Theme = 'dark'
 				}
-				 window.location.reload();
+				console.log("set theme==",uni.getStorageSync('theme'))
 			}
 		},
 		mounted() {
-			// let theme = getTheme(); // 调用公共函数			
-			 
-			console.log(this.themeConf);
+
 		}
 	}
 </script>
 
-<style >
+<style>
 	.text {
 		font-size: 14px;
 		margin-top: 5px;
@@ -154,9 +163,9 @@
 		margin-bottom: 15px;
 	}
 
-	.uni-grid-item {}
+	/* .uni-grid-item {}
 
-	.uni-list[data-v-c2f1266a] {
+	.uni-list  {
 		display: flex;
 		background-color: var(--main-bg-color);
 	}
@@ -165,7 +174,7 @@
 		align-items: center;
 		padding: 1rem;
 		border: 0px;
-	}
+	} */
 
 	.grid-dot {
 		position: absolute;
@@ -179,14 +188,15 @@
 
 
 
- 
 
-	.device-list {
+
+	/* 	.device-list {
 		position: absolute;
 		z-index: 10;
 		top: 7rem;
 		width: 100vw;
-	}
+		height:100vh;
+	} */
 
 
 	/* #ifdef H5 */
@@ -203,7 +213,7 @@
 	}
 
 	/* #endif */
-	
+
 
 	::v-deep .popupfind .uni-popup__wrapper {
 		width: 20rem;
@@ -226,11 +236,11 @@
 	}
 
 
-	::v-deep .popupfind .uni-popup__wrapper .text {
+	/* ::v-deep .popupfind .uni-popup__wrapper .text {
 		margin: 1rem;
 		display: block;
 
-	}
+	} */
 
 	::v-deep .popupfind .uni-popup__wrapper .icon {
 		width: 20px;
@@ -247,17 +257,7 @@
 		font-size: 0.825rem;
 	}
 
-	::v-deep .uni-section {
-		background-color: var(--main-bg-color);
 
-
-	}
-
-	::v-deep .uni-section .uni-section-header__content .distraction span {
-		font-size: 16px;
-		margin-left: 20px;
-		color: white;
-	}
 
 	.unable {
 		position: absolute;
@@ -284,23 +284,35 @@
 		color: #a15621;
 	}
 
-	  ::v-deep .uni-section .uni-section-header__content .distraction span::before {
-	  	content: '';
-	  	position: absolute;
-	  	left: 2%;
-	  	top: 35%;
-	  	overflow: hidden;
-	  	zoom: 1;
-	  	width: 0.7rem;
-	  	height: 0.7rem;
-	  	text-indent: -99999px;
-	  	border-left: 0.1rem solid #b2b2b2;
-	  	border-top: 0.1rem solid #b2b2b2;
-	  	transform: rotate(-45deg);
-	  	-0-transform: rotate(-45deg);
-	  	-moz-transform: rotate(-45deg);
-	  	-webkit-transform: rotate(-45deg);
-	  }
+	::v-deep .uni-section {
+		background-color: var(--main-bg-color);
+
+
+	}
+
+	::v-deep .uni-section .uni-section-header__content .distraction span {
+		font-size: 16px;
+		margin-left: 20px;
+		color: white;
+	}
+	
+	::v-deep .uni-section .uni-section-header__content .distraction span::before {
+		content: '';
+		position: absolute;
+		left: 2%;
+		top: 35%;
+		overflow: hidden;
+		zoom: 1;
+		width: 0.7rem;
+		height: 0.7rem;
+		text-indent: -99999px;
+		border-left: 0.1rem solid #b2b2b2;
+		border-top: 0.1rem solid #b2b2b2;
+		transform: rotate(-45deg);
+		-0-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+	}
 
 	::v-deep .permission .uni-list-item__extra-text {
 		color: #a15621;
@@ -362,7 +374,7 @@
 		width: 70%;
 	}
 
-	
+
 	::v-deep .uni-table {
 		background-color: var(--main-bg-color);
 		padding: 10px;
@@ -449,16 +461,9 @@
 		background-color: transparent !important;
 	}
 
-/* 	.languagePopup ::v-deep.uni-popup .uni-popup__wrapper {} */
-	
-	::v-deep .unpairBtn {font-size:14px}
-	
-	
-	.grid-item-box {
-		background-color: var(--bg-device);
+	/* 	.languagePopup ::v-deep.uni-popup .uni-popup__wrapper {} */
+
+	::v-deep .unpairBtn {
+		font-size: 14px
 	}
-	
-	/* ::v-deep .uni-popup .uni-popup__wrapper {
-		background-color: #f7f7f7 !important;
-	} */
 </style>

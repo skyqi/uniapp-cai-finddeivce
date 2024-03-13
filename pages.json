@@ -6,7 +6,7 @@
 		}
 	}    ,{
             "path" : "pages/app_menu/app_menu",
-            "style" :                                                                                    
+            "style" :                                                                                   
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
@@ -93,16 +93,26 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+         
+        {
+        	"path" : "pages/testa/testa",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "",
+        		"enablePullDownRefresh" : false
+        	}
         }
          
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTextStyle": "",
+		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
-			"background": "#efeff4"
-		}
+			"background": "#efeff4",
+			"titleNView":false 
+		} 
 	}
 }

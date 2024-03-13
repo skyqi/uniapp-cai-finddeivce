@@ -1,98 +1,131 @@
 <template>
-	<view class="settings">
-		<uni-section class="mb-10 section" title="Device settings">
-			<span @click='returnHandle'>
-			  <em class="nav-arrow"></em>
-			</span>
-		</uni-section>
+	<view :class="themeCss" tag="themeCss">
+		<div class="cpage">
+			<view class="settings">
+				<uni-section class="mb-10 section" title="Device settings">
+					<span @click='returnHandle'>
+						<em class="nav-arrow"></em>
+					</span>
+				</uni-section>
 
 
-		<view class="device-items" style="margin-top: 2rem;">
-			<ul @click="renameHandle">
-				<li>Name</li>
-				<li>
-					DeviceName
-				</li>
-			</ul>
-			<ul @click="ringtoneHandle">
-				<li>Ringtone</li>
-				<li class="txt">Tone</li>
-			</ul>
-			<ul>
-				<li>Device colour </li>
-				<li class="txt">White</li>
-			</ul>
-			<ul @click="updateHandle">
-				<li>Device update</li>
-				<li class="ico">
-					<image src="/static/Images/Forward Arrow.svg"></image>
-				</li>
-			</ul>
-			<ul @click="locateHandle()" style="border-bottom: 0px;">
-				<li style="margin-top: .8rem;">Out of range alert</li>
-				<li class="ico" @click="switchThemem">
-					<view class="dark">
-						<view class="icon">
-							<span><em></em></span>
-						</view>
-					</view>
-				</li>
-			</ul>
+				<view class="device-items" style="margin-top: 2rem;">
+					<ul @click="renameHandle">
+						<li>Name</li>
+						<li>
+							DeviceName
+						</li>
+					</ul>
+					<ul @click="ringtoneHandle">
+						<li>Ringtone</li>
+						<li class="txt">Tone</li>
+					</ul>
+					<ul>
+						<li>Device colour </li>
+						<li class="txt">White</li>
+					</ul>
+					<ul @click="updateHandle">
+						<li>Device update</li>
+						<li class="ico">
+							<image src="/static/Images/Forward Arrow.svg"></image>
+						</li>
+					</ul>
+					<ul @click="locateHandle()" style="border-bottom: 0px;">
+						<li style="margin-top: .8rem;">Out of range alert</li>
+						<li class="ico" @click="switchTheme">
+							<view class="dark">
+								<view class="icon">
+									<span><em></em></span>
+								</view>
+							</view>
+						</li>
+					</ul>
 
-			<p class="alerted" style="margin:1rem 1rem 2rem 2rem;font-size:12px;">
-				Be alerted when your phone moves out of range of yourpulse unit
-			</p>
-			<button class="unpairBtn">Unpair device</button>
+					<p class="alerted" style="margin:1rem 1rem 2rem 2rem;font-size:12px;">
+						Be alerted when your phone moves out of range of yourpulse unit
+					</p>
+					<button class="unpairBtn">Unpair device</button>
 
 
-		</view>
-
-		<view>
-			<!-- 弹窗 -->
-			<uni-popup ref="devPopup" class="devPopup"  >
-				<view class="devPopup-inbox">
-					<h3>Rename Device</h3>
-					<uni-forms ref="baseForm" :modelValue="baseFormData">
-						<uni-forms-item>
-							<uni-easyinput class="renamedevice-input" placeholder="DeviceName" />
-						</uni-forms-item>
-					</uni-forms>
-
-					<view class="button-group">
-						<li @click="canclehandel">Cancle</li>
-						<li @click="canclehandel">Confirm</li>
-					</view>
 				</view>
-			</uni-popup>
-		</view>
 
-<view>
-			<!-- 弹窗 -->
-			<uni-popup ref="ringtonePopup" class="ringtone-select"  >
-				<uni-forms ref="baseForm" class="ringtone-Form" >
-					<uni-forms-item class="ringtone-Form-item" >
-						<uni-data-checkbox class="ringtone-data-checkbox" :localdata="tones" />
-					</uni-forms-item>
-				
-				</uni-forms>
-			</uni-popup>
-		</view>
-		
+				<view>
+					<!-- 弹窗 -->
+					<uni-popup ref="devPopup" class="devPopup">
+						<view class="devPopup-inbox">
+							<h3>Rename Device</h3>
+							<uni-forms ref="baseForm" :modelValue="baseFormData">
+								<uni-forms-item>
+									<uni-easyinput class="renamedevice-input" placeholder="DeviceName" />
+								</uni-forms-item>
+							</uni-forms>
+
+							<view class="button-group">
+								<li @click="canclehandel">Cancle</li>
+								<li @click="canclehandel">Confirm</li>
+							</view>
+						</view>
+					</uni-popup>
+				</view>
+
+				<view>
+					<!-- 弹窗 -->
+					<uni-popup ref="ringtonePopup" class="ringtone-select">
+						<uni-forms ref="baseForm" class="ringtone-Form">
+							<uni-forms-item class="ringtone-Form-item">
+								<uni-data-checkbox class="ringtone-data-checkbox" :localdata="tones" />
+							</uni-forms-item>
+
+						</uni-forms>
+					</uni-popup>
+				</view>
+			</view>
+		</div>
 	</view>
 </template>
 
 <script>
+	import {
+		getTheme
+	} from '@/common/utils'; // 只导入特定的函数
+
+	const Theme = getTheme()
 	export default {
 		data() {
 			return {
-				tones: [
-					{text: 'Tone',value: 0},{text: 'Tone',value: 1},
-					{text: 'Tone',value: 2},{text: 'Tone',value: 3},	
-					{text: 'Tone',value: 0},{text: 'Tone',value: 0},
-					{text: 'Tone',value: 0},{text: 'Tone',value: 0},
-					{text: 'Tone',value: 0},{text: 'Tone',value: 0},
-					{text: 'Tone',value: 0},{text: 'Tone',value: 0},
-					{text: 'Tone',value: 0},{text: 'Toness',value: 0},								
+				themeCss: getTheme() + 'Theme',
+				tones: [{
+						text: 'Tone',
+						value: 0
+					}, {
+						text: 'Tone',
+						value: 1
+					},
+					{
+						text: 'Tone',
+						value: 2
+					}, {
+						text: 'Tone',
+						value: 3
+					},
+					{
+						text: 'Tone',
+						value: 0
+					}, {
+						text: 'Tone',
+						value: 0
+					},
+					{
+						text: 'Tone',
+						value: 0
+					}, {
+						text: 'Tone',
+						value: 0
+					},
+					{
+						text: 'Tone',
+						value: 0
+					}
 				]
 			}
 		},
@@ -117,19 +150,25 @@
 				this.$refs.ringtonePopup.open("bottom")
 			},
 			switchTheme() {
-				let theme = localStorage.getItem('theme');
+				const theme = uni.getStorageSync('theme');
 				if (!theme) {
-					localStorage.setItem('theme','light');
-				}else if (theme=='dark') {
-					localStorage.setItem('theme','light');
-				}else {
-					localStorage.setItem('theme','dark');
+					uni.setStorageSync('theme', 'light');
+					this.themeCss = 'lightTheme'
+				} else if (theme == 'dark') {
+					uni.setStorageSync('theme', 'light');
+					this.themeCss = 'lightTheme'
+				} else {
+					uni.setStorageSync('theme', 'dark');
+					this.themeCss = 'darkTheme'
 				}
-				 window.location.reload();
+				console.log("set theme==", uni.getStorageSync('theme'))
+			},
+			locateHandle() {
+
 			}
 		},
 		mounted() {
-			
+
 		}
 	}
 </script>
@@ -210,6 +249,7 @@
 	::v-deep .uni-data-checklist .checklist-group .checklist-box {
 		padding-left: 1rem;
 		margin: 0rem;
+		width: 100%;
 	}
 
 	::v-deep .uni-data-checklist .checklist-group .checklist-box .radio__inner {}
@@ -226,15 +266,12 @@
 	/deep/ .uni-data-checklist .checklist-group .checklist-box:last-child .checklist-content .checklist-text {
 		/* border-bottom: 0px; */
 	}
-	
+
 	/deep/ .uni-forms-item {
 		position: relative;
 		display: flex;
 		z-index: 50;
 		padding-bottom: 0px;
-		margin-bottom:0px;
+		margin-bottom: 0px;
 	}
-	
-	
-	
 </style>

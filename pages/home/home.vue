@@ -1,111 +1,113 @@
 <template>
-	<view class="device-grid">
-		<div class="header-bar ">
-			<img class="address-logo" :src="'/static/Images/'+theme+'/logo with text.png'" />
-			<view class="right">
-				<em class='grid-ico1' v-if="!rowlist_mod" @click="rowlist_mod=!rowlist_mod"></em>
-				<em class='grid-ico2' v-if="rowlist_mod" @click="rowlist_mod=!rowlist_mod"></em>
-				<em class='dian-ico'></em>
-			</view>
-		</div>
-
-		<uni-grid v-if="!rowlist_mod" class="device-list" :column="2" :square="false" :highlight="false">
-			<uni-grid-item v-for="(item, index) in 4 " :index="index" :key="index">
-				<view class="grid-item-box">
-					<div class="product">
-						<image src="/static/Images/Product  Image - white.png" class="addico"></image>
-						<em @click="popHandle" class="product-dianico"></em>
-					</div>
-					<text class="text">Device Name</text>
-					<text class="small">Connected 88%</text>
-				</view>
-			</uni-grid-item>
-		</uni-grid>
-
-
-		<view class="row-device-body" v-if="rowlist_mod">
-			<uni-row class="row-device-row" v-for="i in 4">
-				<uni-col :span="5">
-					<view class="demo-uni-col device-ico">
-						<image src="/static/Images/Product  Image - white.png"></image>
+	<view :class="themeCss" tag="themeCss">
+		<div class="cpage">
+			<view class="device-grid">
+				<div class="header-bar ">
+					<img class="address-logo" :src="'./static/Images/'+theme+'/logo-with-text.png'" />
+					<view class="right">
+						<em class='grid-ico1' v-if="!rowlist_mod" @click="rowlist_mod=!rowlist_mod"></em>
+						<em class='grid-ico2' v-if="rowlist_mod" @click="rowlist_mod=!rowlist_mod"></em>
+						<em class='dian-ico'></em>
 					</view>
-				</uni-col>
-				<uni-col :span="19">
-					<view class="demo-uni-col row-device-col2">
-						<text class="text">Device Name</text>
-						<text class="small">Connected 88%</text>
-						<em class="dian-ico" @click="popHandle"></em>
-					</view>
-				</uni-col>
-			</uni-row>
-		</view>
+				</div>
 
-		<view class="btn-group">
-			<uni-icons type="plusempty" size="30"></uni-icons>
-			<button class="againbtn" @click="addDeviceHandel">Add device</button>
-		</view>
+				<uni-grid v-if="!rowlist_mod" class="device-list" :column="2" :square="false" :showBorder="false" :highlight="false">
+					<uni-grid-item v-for="(item, index) in 4 " :index="index" :key="index">
+						<view class="grid-item-box">
+							<div class="product">
+								<image src="/static/Images/Product  Image - white.png" class="addico"></image>
+								<em @click="popHandle" class="product-dianico"></em>
+							</div>
+							<text class="text">Device Name</text>
+							<text class="small">Connected 88%</text>
+						</view>
+					</uni-grid-item>
+				</uni-grid>
 
-		<!-- 底部弹窗 -->
-		<uni-popup ref="popup" class="device-popup-wrap"
-			style=" ">
-			<view class="device-name-wrap">
-				<view class="device-name-area">
-					<image src="/static/Images/Product  Image - white.png" style="width:4rem;height: 4rem;"></image>
-					<text class="device-name">DeviceName</text>
+
+				<view class="row-device-body" v-if="rowlist_mod">
+					<uni-row class="row-device-row" v-for="i in 4">
+						<uni-col :span="5">
+							<view class="demo-uni-col device-ico">
+								<image src="/static/Images/Product  Image - white.png"></image>
+							</view>
+						</uni-col>
+						<uni-col :span="19">
+							<view class="demo-uni-col row-device-col2">
+								<text class="text">Device Name</text>
+								<text class="small">Connected 88%</text>
+								<em class="dian-ico" @click="popHandle"></em>
+							</view>
+						</uni-col>
+					</uni-row>
 				</view>
 
-				<view class="popup-content"><text class="text languagetxt">Change ringtone</text></view>
+				<view class="btn-group">
+					<uni-icons type="plusempty" size="22"></uni-icons>
+					<button class="againbtn" @click="addDeviceHandel">Add device</button>
+				</view>
 
-				<view class="popup-content theme"><text class="text themetxt">Out of range alert</text>
-					<view class="dark">
-						<text class="dark-text"></text>
-						<view class="icon">
-							<span><em></em></span>
+				<!-- 底部弹窗 -->
+				<uni-popup ref="popup" class="device-popup-wrap" style=" ">
+					<view class="device-name-wrap">
+						<view class="device-name-area">
+							<image src="/static/Images/Product  Image - white.png" style="width:4rem;height: 4rem;">
+							</image>
+							<text class="device-name">DeviceName</text>
+						</view>
+
+						<view class="popup-content"><text class="text languagetxt">Change ringtone</text></view>
+
+						<view class="popup-content theme"><text class="text themetxt">Out of range alert</text>
+							<view class="dark">
+								<text class="dark-text"></text>
+								<view class="icon">
+									<span><em></em></span>
+								</view>
+							</view>
+						</view>
+
+
+						<view class="popup-content" @click="unpairBntHandle">
+							<text class="text abouttxt">Unpair devcie</text>
 						</view>
 					</view>
+				</uni-popup>
+
+				<view>
+					<!-- ----- 1 bluetooth ----- -->
+					<uni-popup ref="bluetoothPopup" class="bluetoothPopup">
+						<view class="Unpair">
+							<h3>Unpair DeviceName?</h3>
+							<p>You will no longer be able to monitoryour Pulse through the app.</p>
+
+							<view class="button-group">
+								<ul>
+									<li @click="canclebluetoothHandle">Cancle</li>
+									<li @click="UnpairHandle">Unpair</li>
+								</ul>
+							</view>
+						</view>
+					</uni-popup>
 				</view>
 
-
-				<view class="popup-content" @click="unpairBntHandle">
-					<text class="text abouttxt">Unpair devcie</text>
+				<view class="pairing" v-if="visible_pairing">
+					 <l-circle class="progress" strokeColor="#f09653,#f7f7f7" v-model:current="modelVale" :percent="target" size="55px">					   
+					 					</l-circle>	
+					<p>Unpairing</p>
 				</view>
+
 			</view>
-		</uni-popup>
-
-		<view>
-			<!-- ----- 1 bluetooth ----- -->
-			<uni-popup ref="bluetoothPopup" class="bluetoothPopup">
-				<view class="Unpair">
-					<h3>Unpair DeviceName?</h3>
-					<p>You will no longer be able to monitoryour Pulse through the app.</p>
-
-					<view class="button-group">
-						<ul>
-							<li @click="canclebluetoothHandle">Cancle</li>
-							<li @click="UnpairHandle">Unpair</li>
-						</ul>
-					</view>
-				</view>
-			</uni-popup>
-		</view>
-
-		<view class="pairing" v-if="visible_pairing">
-			<RadialProgress class="progress" :diameter="60" :completed-steps="completedSteps" :total-steps="totalSteps"
-				:startColor="'#db792f'" :stopColor="'#191918'" :innerStrokeColor="'#191918'" :strokeWidth="5"
-				:innerStrokeWidth="5">
-			</RadialProgress>
-			<p>Unpairing</p>
-		</view>
-
+		</div>
 	</view>
-
 </template>
 
 <script>
-	import RadialProgress from "vue3-radial-progress";
+	 
 	import {
 		getTheme
 	} from '@/common/utils'; // 只导入特定的函数	
+	const Theme = getTheme()
 	export default {
 		data() {
 			return {
@@ -114,14 +116,17 @@
 				completedSteps: 0,
 				totalSteps: 10,
 				theme: getTheme(),
+				themeCss: getTheme() + 'Theme',
+				target:100,
+				modelVale:0,
 			}
 		},
-		components: {
-			RadialProgress
-		},
+		 
 		methods: {
 			addDeviceHandel: function() {
-				// this.$refs.popup.open("bottom");
+				uni.navigateTo({
+					url: '/pages/index/index'
+				});
 			},
 			popHandle: function() {
 				this.$refs.popup.open("bottom");
@@ -162,7 +167,7 @@
 			},
 		},
 		mounted() {
-			 
+
 		}
 	}
 </script>
@@ -183,7 +188,7 @@
 		margin-bottom: 15px;
 	}
 
- 	.uni-grid-item {}
+	.uni-grid-item {}
 
 	.uni-list[data-v-c2f1266a] {
 		display: flex;
@@ -225,7 +230,7 @@
 		left: 6.5rem;
 	}
 
- 
+
 	.device-list {
 		position: absolute;
 		z-index: 10;
@@ -246,7 +251,7 @@
 
 	.btn-group .uni-icons {
 		position: absolute;
-		top: .8rem;
+		top: 1.1rem;
 		left: 1rem;
 		width: 1rem;
 		height: 1rem;
@@ -336,7 +341,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		height: 3.5rem;	 
+		height: 3.5rem;
 		margin: 1.5rem;
 		border-radius: 10px;
 		position: absolute;
@@ -356,7 +361,6 @@
 
 	::v-deep .pairing p {
 		margin-left: 1rem;
-		 
+
 	}
- 
 </style>
